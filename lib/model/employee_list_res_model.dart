@@ -4,23 +4,23 @@
 
 import 'dart:convert';
 
-EmployeeListResModel employeeListResModelFromJson(String str) =>
-    EmployeeListResModel.fromJson(json.decode(str));
+ProductListResModel employeeListResModelFromJson(String str) =>
+    ProductListResModel.fromJson(json.decode(str));
 
-String employeeListResModelToJson(EmployeeListResModel data) =>
+String employeeListResModelToJson(ProductListResModel data) =>
     json.encode(data.toJson());
 
-class EmployeeListResModel {
+class ProductListResModel {
   String? msg;
   List<EmployeeModel>? employeeList;
 
-  EmployeeListResModel({
+  ProductListResModel({
     this.msg,
     this.employeeList,
   });
 
-  factory EmployeeListResModel.fromJson(Map<String, dynamic> json) =>
-      EmployeeListResModel(
+  factory ProductListResModel.fromJson(Map<String, dynamic> json) =>
+      ProductListResModel(
         msg: json["Msg"],
         employeeList: json["data"] == null
             ? []

@@ -37,7 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       icon: Icon(Icons.edit),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // write code to delete the employee from the list
+                        context.read<HomeScreenController>().deleteEmployee(
+                            id: homecontroller.employeeList[index].id
+                                .toString());
+                      },
                       icon: Icon(Icons.delete),
                     )
                   ],

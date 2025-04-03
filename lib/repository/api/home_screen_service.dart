@@ -1,29 +1,29 @@
+import 'package:authorised_luminar_api_dec/app_confg/app_config.dart';
 import 'package:authorised_luminar_api_dec/model/employee_list_res_model.dart';
+import 'package:authorised_luminar_api_dec/repository/helpers/api_helper.dart';
 import 'package:http/http.dart' as http;
 
 class HomeScreenService {
-  Future<EmployeeListResModel?> fetchEmployees() async {
-    final url = Uri.parse("https://freeapi.luminartechnohub.com/products-all/");
-    final response = await http.get(url, headers: {
-      "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ2MTY2MzQ0LCJpYXQiOjE3NDM1NzQzNDQsImp0aSI6IjIxOGY5ZDk2OGU5NzQ0YzFiMmU4Mzg5ZmEzZjJmM2RmIiwidXNlcl9pZCI6MzYzLCJpZCI6MzYzLCJuYW1lIjoic2hpaGFiIiwicGxhY2UiOiJlcm5ha3VsYW0iLCJlbWFpbCI6InNoaWhhYjFAZ21haWwuY29tIn0.-8_YWcl2DV4TG33N8zqDeSyHmm83Aho1VRfkyaew56g"
-    });
+  Future<ProductListResModel?> fetchProduct() async {
+    final response = await ApiHelper.getData(endpoint: "/products-all/");
 
-    if (response.statusCode == 200) {
-      // Handle successful response
-      print("Data fetched successfully");
-      print(response.body.toString());
-
-      EmployeeListResModel resModel =
-          employeeListResModelFromJson(response.body);
+    if (response != null) {
+      ProductListResModel resModel = employeeListResModelFromJson(response);
 
       return resModel;
     } else {
-      // Handle error response
-      print(
-          "Error fetching employees with status code: ${response.statusCode}");
-      print(response.body.toString());
       return null;
+    }
+  }
+
+  Future<bool?> deleteProduct({required String productId}) async {
+    final response =
+        await ApiHelper.deleteData(endpoint: "/product-delete/$productId/");
+
+    if (response != null) {
+      return true;
+    } else {
+      return false;
     }
   }
 }
