@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-ProductListResModel employeeListResModelFromJson(String str) =>
+ProductListResModel productsListResModelFromJson(String str) =>
     ProductListResModel.fromJson(json.decode(str));
 
 String employeeListResModelToJson(ProductListResModel data) =>

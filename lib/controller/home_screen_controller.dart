@@ -26,6 +26,26 @@ class HomeScreenController with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> fetchMyProducts() async {
+    isLoading = true;
+    notifyListeners();
+    try {
+      final response = await HomeScreenService().fetchMyProducts();
+
+      if (response != null) {
+        print("my data fetched");
+        employeeList = response.employeeList ?? [];
+      } else {
+        print("No data found");
+      }
+    } catch (e) {
+      print("Error fetching employees: $e");
+    }
+
+    isLoading = false;
+    notifyListeners();
+  }
+
   Future<void> deleteEmployee({required String id}) async {
     log("deleteEmployee called with id: $id");
     isLoading = true;
