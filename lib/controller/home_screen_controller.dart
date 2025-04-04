@@ -54,7 +54,7 @@ class HomeScreenController with ChangeNotifier {
 
     if (response == true) {
       print("Employee deleted successfully");
-      await fetchEmployees();
+      await fetchMyProducts();
     } else {
       print("Error deleting employee");
     }

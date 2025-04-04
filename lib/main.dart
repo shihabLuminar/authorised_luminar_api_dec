@@ -1,5 +1,6 @@
 import 'package:authorised_luminar_api_dec/controller/home_screen_controller.dart';
-import 'package:authorised_luminar_api_dec/view/home_screen/home_screen.dart';
+import 'package:authorised_luminar_api_dec/controller/login_screen_controller.dart';
+import 'package:authorised_luminar_api_dec/view/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,12 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => HomeScreenController(),
-        )
+        ChangeNotifierProvider(create: (context) => HomeScreenController()),
+        ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
       child: MaterialApp(
-        home: HomeScreen(),
+        home: LoginScreen(),
       ),
     );
   }
