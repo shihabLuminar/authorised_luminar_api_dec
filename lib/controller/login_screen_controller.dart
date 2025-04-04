@@ -22,13 +22,15 @@ class LoginScreenController with ChangeNotifier {
         return true;
       } else {
         log("Login failed: Invalid response");
+
         return false;
       }
     } catch (e) {
       print("Error logging in: $e");
       return false;
+    } finally {
+      isLoading = false;
+      notifyListeners();
     }
-    isLoading = false;
-    notifyListeners();
   }
 }

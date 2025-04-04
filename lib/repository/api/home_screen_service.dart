@@ -20,7 +20,11 @@ class HomeScreenService {
   }
 
   Future<ProductListResModel?> fetchMyProducts() async {
-    final response = await ApiHelper.getData(endpoint: "/my-products/");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    final response = await ApiHelper.getData(
+        endpoint: "/my-products/",
+        header: ApiHelper.header(token: token ?? ""));
 
     if (response != null) {
       ProductListResModel resModel = productsListResModelFromJson(response);
