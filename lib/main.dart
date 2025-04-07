@@ -1,6 +1,6 @@
 import 'package:authorised_luminar_api_dec/controller/home_screen_controller.dart';
 import 'package:authorised_luminar_api_dec/controller/login_screen_controller.dart';
-import 'package:authorised_luminar_api_dec/view/login_screen/login_screen.dart';
+import 'package:authorised_luminar_api_dec/view/spash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => LoginScreenController())
       ],
       child: MaterialApp(
-        home: LoginScreen(),
+        home: SplashScreen(),
       ),
     );
   }

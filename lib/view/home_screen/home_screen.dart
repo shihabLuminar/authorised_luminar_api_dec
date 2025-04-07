@@ -1,8 +1,9 @@
-import 'dart:developer';
-
+import 'package:authorised_luminar_api_dec/app_utils/app_utils.dart';
 import 'package:authorised_luminar_api_dec/controller/home_screen_controller.dart';
+import 'package:authorised_luminar_api_dec/view/login_screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,7 +30,33 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Employees"),
+          title: Text(AppUtils.getCurrentDate("dd MMM yyyy", DateTime.now())),
+          actions: [
+            IconButton(
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.clear().then(
+                    (value) {
+                      if (value == true) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ),
+                            (route) => false);
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Logout failed"),
+                          ),
+                        );
+                      }
+                    },
+                  );
+                },
+                icon: Icon(Icons.logout))
+          ],
           bottom: TabBar(
               onTap: (value) {
                 if (value == 0) {
